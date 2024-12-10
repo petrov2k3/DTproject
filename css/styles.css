@@ -147,6 +147,24 @@ table tbody tr:hover {
     background: #f1f1f1;
 }
 
+ul {
+    list-style-type: disc; /* Тип маркера: крапка */
+    margin-left: 20px; /* Відступ для списку */
+}
+
+ol {
+    margin-left: 20px; /* Відступ для списку */
+    font-size: 18px; /* Розмір тексту */
+}
+
+li {
+    margin-bottom: 10px; /* Відступ між елементами списку */
+    font-size: 18px; /* Розмір тексту */
+}
+
+.center-text {
+    text-align: center; /* Вирівнювання тексту по центру */
+}
 
 /* Стилі для тестів */
 
@@ -177,3 +195,4 @@ table tbody tr:hover {
 .submit-btn:hover {
     background-color: #0056b3;
 }
+
