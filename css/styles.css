@@ -74,3 +74,12 @@ h1 {
 p {
     font-size: 18px;
 }
+
+.theory-image {
+    display: block;
+    margin: 20px auto; /* Центрування картинки */
+    max-width: 70%; /* Масштабування для адаптивності */
+    height: auto; /* Збереження пропорцій */
+    border: 2px solid #ddd; /* Декоративна рамка */
+    border-radius: 5px; /* Закруглені кути */
+}
