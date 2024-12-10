@@ -24,7 +24,10 @@ body {
     color: #1B1D1F;
     padding: 40px;
     min-height: 100vh;
+    margin-left: 220px; /* Відступ для тексту, щоб уникнути заходу на сайдбар */
 }
+
+
 
 /* Сайдбар */
 .sidebar {
