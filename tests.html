@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тести</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="theory.html">Теорія</a></li>
+            <li><a href="examples.html">Приклади</a></li>
+            <li><a href="tests.html" class="active">Тести</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Тести</h1>
+        <p>Пройдіть тестування, щоб перевірити свої знання з теорії прийняття рішень.</p>
+
+        <div class="test-container">
+            <h2>Тест 1: Основи теорії прийняття рішень</h2>
+            <form>
+                <div class="question">
+                    <p><strong>1. Що таке мінімаксний критерій?</strong></p>
+                    <input type="radio" id="q1a1" name="q1" value="a1">
+                    <label for="q1a1">Метод максимізації вигоди</label><br>
+                    <input type="radio" id="q1a2" name="q1" value="a2">
+                    <label for="q1a2">Метод мінімізації ризиків у найгірших сценаріях</label><br>
+                    <input type="radio" id="q1a3" name="q1" value="a3">
+                    <label for="q1a3">Система ухвалення колективних рішень</label>
+                </div>
+
+                <div class="question">
+                    <p><strong>2. Що таке рівновага Неша?</strong></p>
+                    <input type="radio" id="q2a1" name="q2" value="a1">
+                    <label for="q2a1">Стан, коли жоден учасник не може покращити свій результат, змінюючи стратегію односторонньо</label><br>
+                    <input type="radio" id="q2a2" name="q2" value="a2">
+                    <label for="q2a2">Метод оптимізації вигод у кооперативних задачах</label><br>
+                    <input type="radio" id="q2a3" name="q2" value="a3">
+                    <label for="q2a3">Розподіл ресурсів між учасниками</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Відправити</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
