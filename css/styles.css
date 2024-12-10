@@ -1,0 +1,69 @@
+/* Загальний стиль для сторінки */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Фон для головної сторінки */
+#home {
+    background: url('/img/fon1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 40px;
+    height: 100vh; /* Займає весь екран */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Фон для інших сторінок */
+.content:not(#home) {
+    background: linear-gradient(270deg, #A5DEFF 0%, #FCFEFF 100%);
+    color: #1B1D1F;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* Сайдбар */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+}
