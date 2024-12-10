@@ -83,3 +83,38 @@ p {
     border: 2px solid #ddd; /* Декоративна рамка */
     border-radius: 5px; /* Закруглені кути */
 }
+
+.project-info {
+    text-align: center;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.6); /* Напівпрозорий фон */
+    padding: 20px;
+    border-radius: 10px; /* Закруглені кути */
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Декоративна тінь */
+}
+
+.project-info h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.project-info p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.project-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.team-list {
+    list-style-type: none; /* Прибираємо маркери списку */
+    padding: 0;
+    font-size: 18px;
+}
+
+.team-list li {
+    margin: 5px 0;
+}
