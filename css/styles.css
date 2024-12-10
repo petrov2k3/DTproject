@@ -56,6 +56,12 @@ body {
     font-weight: 500;
 }
 
+.sidebar ul li a.active {
+    font-weight: bold; /* Робимо текст жирнішим */
+    color: #FFD700; /* Жовтий колір */
+    text-decoration: underline; /* Додаємо підкреслення */
+}
+
 .sidebar ul li a:hover {
     text-decoration: underline;
 }
