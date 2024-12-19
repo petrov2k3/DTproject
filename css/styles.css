@@ -166,10 +166,19 @@ li {
     text-align: center; /* Вирівнювання тексту по центру */
 }
 
-.example-image-matrix {
+.example-small-image {
     display: block;
     margin: 20px auto; /* Центрування картинки */
-    max-width: 20%; /* Масштабування для адаптивності */
+    max-width: 15%; /* Масштабування для адаптивності */
+    height: auto; /* Збереження пропорцій */
+    border: 2px solid #ddd; /* Декоративна рамка */
+    border-radius: 5px; /* Закруглені кути */
+}
+
+.example-image-graph {
+    display: block;
+    margin: 20px auto; /* Центрування картинки */
+    max-width: 40%; /* Масштабування для адаптивності */
     height: auto; /* Збереження пропорцій */
     border: 2px solid #ddd; /* Декоративна рамка */
     border-radius: 5px; /* Закруглені кути */
