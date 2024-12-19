@@ -166,6 +166,15 @@ li {
     text-align: center; /* Вирівнювання тексту по центру */
 }
 
+.example-image-matrix {
+    display: block;
+    margin: 20px auto; /* Центрування картинки */
+    max-width: 20%; /* Масштабування для адаптивності */
+    height: auto; /* Збереження пропорцій */
+    border: 2px solid #ddd; /* Декоративна рамка */
+    border-radius: 5px; /* Закруглені кути */
+}
+
 /* Стилі для тестів */
 
 .test-container {
