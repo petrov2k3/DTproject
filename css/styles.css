@@ -119,6 +119,53 @@ p {
     margin: 5px 0;
 }
 
+/* Стилі для прикладів */
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background: white;
+    text-align: center;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+table th {
+    background: #f4f4f4;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background: #f1f1f1;
+}
+
+ul {
+    list-style-type: disc; /* Тип маркера: крапка */
+    margin-left: 20px; /* Відступ для списку */
+}
+
+ol {
+    margin-left: 20px; /* Відступ для списку */
+    font-size: 18px; /* Розмір тексту */
+}
+
+li {
+    margin-bottom: 10px; /* Відступ між елементами списку */
+    font-size: 18px; /* Розмір тексту */
+}
+
+.center-text {
+    text-align: center; /* Вирівнювання тексту по центру */
+}
+
 /* Стилі для тестів */
 
 .test-container {
