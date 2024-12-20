@@ -38,13 +38,19 @@
                 <label for="q1a4">D. Для максимізації середнього виграшу</label>
             </div>
         
-            <!-- Тест 9 (відкрите питання) -->
+            <!-- Тест 9 -->
             <div class="question">
                 <p><strong>9. Продовжіть речення: Дане рівняння є _______</strong></p>
                 <input type="text" id="q9" name="q9" placeholder="Введіть відповідь">
             </div>
+
+            <!-- Тест 10 -->
+            <div class="question">
+                <p><strong>10. Геометричне місце точок, що відповідають рандомізованим розв’язкам, називають _______</strong></p>
+                <input type="text" id="q10" name="q10" placeholder="Введіть відповідь">
+            </div>
         
-            <!-- Тест 12 (відповідність) -->
+            <!-- Тест 12 -->
             <div class="question">
                 <p><strong>12. Встановіть правильну послідовність алгоритму пошуку рандомізованого розв’язку за мінімаксним критерієм:</strong></p>
                 <ol>
@@ -86,9 +92,13 @@
                 </ol>
             </div>
         
-            <button type="submit" class="submit-btn">Відправити</button>
+            <button type="button" class="submit-btn" onclick="checkAnswers()">Відправити</button>
+            <p id="result" style="font-weight: bold; margin-top: 20px;"></p>
+            
         </div>
         
     </div>
+
+    <script src="./tests.js"></script>
 </body>
 </html>
