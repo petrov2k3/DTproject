@@ -248,3 +248,22 @@ video {
     border: 2px solid #ddd; /* Декоративна рамка */
     border-radius: 5px; /* Закруглені кути */
 }
+
+input[type="text"] {
+    width: 100%; /* Зробить поле ширшим */
+    max-width: 400px; /* Максимальна ширина поля */
+    padding: 10px; /* Внутрішні відступи */
+    font-size: 16px; /* Розмір шрифту */
+    border: 2px solid #ccc; /* Рамка поля */
+    border-radius: 5px; /* Округлі кути */
+    margin-top: 10px; /* Відступ зверху */
+    margin-bottom: 10px; /* Відступ знизу */
+    box-sizing: border-box; /* Враховує padding у розмірах елемента */
+    font-family: 'Montserrat', sans-serif;
+}
+
+input[type="text"]:focus {
+    border-color: #489cc6; /* Колір рамки при фокусі */
+    outline: none; /* Прибрати стандартний outline */
+    box-shadow: 0 0 5px rgba(98, 196, 213, 0.5); /* Додати легке підсвічування */
+}
