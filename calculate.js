@@ -135,191 +135,263 @@ generateMatrixButton.addEventListener('click', generateMatrix);
 
 const calculateButton = document.getElementById('calculate');
 calculateButton.addEventListener('click', () => {
-    calculate();
-    calculateMinimaxCriterion();
+  calculate();
+  calculateMinimaxCriterion();
 });
 
 // Function to generate the input matrix
 function generateMatrix() {
-    const strategies = parseInt(document.getElementById('strategies').value);
-    const states = 2;
-    const matrixContainer = document.getElementById('matrixContainer');
-    matrixContainer.innerHTML = '';
+  const strategies = parseInt(document.getElementById('strategies').value);
+  const states = 2;
+  const matrixContainer = document.getElementById('matrixContainer');
+  matrixContainer.innerHTML = '';
 
-    const table = document.createElement('table');
-    for (let i = 0; i < strategies; i++) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < states; j++) {
-            const cell = document.createElement('td');
-            const input = document.createElement('input');
-            input.type = 'number';
-            input.className = 'matrixInput';
-            input.placeholder = `S${j + 1}`;
-            input.dataset.strategy = i;
-            input.dataset.state = j;
-            cell.appendChild(input);
-            row.appendChild(cell);
-        }
-        table.appendChild(row);
+  const table = document.createElement('table');
+  for (let i = 0; i < strategies; i++) {
+    const row = document.createElement('tr');
+    for (let j = 0; j < states; j++) {
+      const cell = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'matrixInput';
+      input.placeholder = `S${j + 1}`;
+      input.dataset.strategy = i;
+      input.dataset.state = j;
+      cell.appendChild(input);
+      row.appendChild(cell);
     }
-    matrixContainer.appendChild(table);
+    table.appendChild(row);
+  }
+  matrixContainer.appendChild(table);
 
-    calculateButton.style.display = 'block';
+  calculateButton.style.display = 'block';
 }
 
 // Function to calculate the minimax criterion and plot the graph
 function calculate() {
-    const matrixInputs = document.querySelectorAll('.matrixInput');
-    const strategies = parseInt(document.getElementById('strategies').value);
-    const states = 2;
+  const matrixInputs = document.querySelectorAll('.matrixInput');
+  const strategies = parseInt(document.getElementById('strategies').value);
+  const states = 2; // Number of states is always 2
 
-    // Build the matrix from inputs
-    const matrix = [];
-    let index = 0;
-    for (let i = 0; i < strategies; i++) {
-        const row = [];
-        for (let j = 0; j < states; j++) {
-            row.push(parseFloat(matrixInputs[index].value));
-            index++;
-        }
-        matrix.push(row);
+  // Build the matrix from inputs
+  const matrix = [];
+  let index = 0;
+  for (let i = 0; i < strategies; i++) {
+    const row = [];
+    for (let j = 0; j < states; j++) {
+      row.push(parseFloat(matrixInputs[index].value));
+      index++;
+    }
+    matrix.push(row);
+  }
+
+  // Extract coordinates for points
+  const points = matrix.map((row, i) => ({ x: row[0], y: row[1], label: `a${i + 1}` }));
+
+  // Function to find orientation of three points
+  function orientation(p, q, r) {
+    const val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+    if (val === 0) return 0; // Collinear
+    return val > 0 ? 1 : -1; // Clockwise or counterclockwise
+  }
+
+  // Convex hull using Graham's scan
+  function convexHull(points) {
+    points.sort((a, b) => (a.x === b.x ? a.y - b.y : a.x - b.x));
+
+    const lower = [];
+    for (const point of points) {
+      while (lower.length >= 2 && orientation(lower[lower.length - 2], lower[lower.length - 1], point) !== -1) {
+        lower.pop();
+      }
+      lower.push(point);
     }
 
-    // Extract coordinates for alpha points
-    const points = matrix.map((row, i) => ({ x: row[0], y: row[1], label: `a${i + 1}` }));
+    const upper = [];
+    for (let i = points.length - 1; i >= 0; i--) {
+      const point = points[i];
+      while (upper.length >= 2 && orientation(upper[upper.length - 2], upper[upper.length - 1], point) !== -1) {
+        upper.pop();
+      }
+      upper.push(point);
+    }
 
-    // Find extreme points (min/max x and y)
-    const minXPoint = points.reduce((min, p) => (p.x < min.x ? p : min), points[0]);
-    const maxXPoint = points.reduce((max, p) => (p.x > max.x ? p : max), points[0]);
-    const minYPoint = points.reduce((min, p) => (p.y < min.y ? p : min), points[0]);
-    const maxYPoint = points.reduce((max, p) => (p.y > max.y ? p : max), points[0]);
+    upper.pop();
+    lower.pop();
+    return lower.concat(upper);
+  }
 
-    // Select points for the boundary
-    const boundaryPoints = [minXPoint, maxXPoint, maxYPoint, minYPoint];
+  // Find intersection of two lines
+  function findIntersection(p1, p2, p3, p4) {
+    const A1 = p2.y - p1.y;
+    const B1 = p1.x - p2.x;
+    const C1 = A1 * p1.x + B1 * p1.y;
 
-    // Remove duplicates and sort for connecting
-    const uniqueBoundaryPoints = Array.from(new Set(boundaryPoints));
+    const A2 = p4.y - p3.y;
+    const B2 = p3.x - p4.x;
+    const C2 = A2 * p3.x + B2 * p3.y;
 
-    // Draw the graph
-    const canvas = document.getElementById('resultChart');
-    canvas.style.display = 'block';
-    const ctx = canvas.getContext('2d');
+    const determinant = A1 * B2 - A2 * B1;
 
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (determinant === 0) {
+      return null; // Lines are parallel
+    }
 
-    // Draw axes
+    const x = (B2 * C1 - B1 * C2) / determinant;
+    const y = (A1 * C2 - A2 * C1) / determinant;
+
+    return { x, y };
+  }
+
+  // Get convex hull points
+  const hullPoints = convexHull(points);
+
+  // Draw the graph
+  const canvas = document.getElementById('resultChart');
+  canvas.style.display = 'block';
+  const ctx = canvas.getContext('2d');
+
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw axes
+  ctx.beginPath();
+  ctx.moveTo(50, 350);
+  ctx.lineTo(550, 350); // X-axis
+  ctx.moveTo(50, 350);
+  ctx.lineTo(50, 50); // Y-axis
+  ctx.stroke();
+
+  // Draw convex hull
+  ctx.beginPath();
+  const startPoint = hullPoints[0];
+  ctx.moveTo(50 + startPoint.x * 50, 350 - startPoint.y * 50);
+  hullPoints.forEach((point) => {
+    const x = 50 + point.x * 50;
+    const y = 350 - point.y * 50;
+    ctx.lineTo(x, y);
+    ctx.fillText(point.label, x + 5, y - 5);
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+  });
+  ctx.closePath();
+  ctx.strokeStyle = 'green';
+  ctx.stroke();
+
+  // Connect the last point to the first point
+  const endPoint = hullPoints[hullPoints.length - 1];
+  ctx.lineTo(50 + startPoint.x * 50, 350 - startPoint.y * 50);
+  ctx.stroke();
+
+  // Define the bisection line from the origin
+  const bisectionLine = { p1: { x: 0, y: 0 }, p2: { x: 1, y: 1 } };
+
+  // Find intersection of bisection line with hull edges
+  let intersectionPoint = null;
+  for (let i = 0; i < hullPoints.length; i++) {
+    const p1 = hullPoints[i];
+    const p2 = hullPoints[(i + 1) % hullPoints.length];
+    const edge = { p1, p2 };
+
+    const intersection = findIntersection(
+      bisectionLine.p1,
+      bisectionLine.p2,
+      edge.p1,
+      edge.p2
+    );
+
+    // Check if the intersection point lies on the edge segment
+    if (
+      intersection &&
+      intersection.x >= Math.min(edge.p1.x, edge.p2.x) &&
+      intersection.x <= Math.max(edge.p1.x, edge.p2.x) &&
+      intersection.y >= Math.min(edge.p1.y, edge.p2.y) &&
+      intersection.y <= Math.max(edge.p1.y, edge.p2.y)
+    ) {
+      intersectionPoint = intersection;
+      break;
+    }
+  }
+
+  // Draw bisection line up to the intersection
+  if (intersectionPoint) {
     ctx.beginPath();
+    ctx.strokeStyle = 'blue';
     ctx.moveTo(50, 350);
-    ctx.lineTo(550, 350); // X-axis
-    ctx.moveTo(50, 350);
-    ctx.lineTo(50, 50); // Y-axis
+    ctx.lineTo(50 + intersectionPoint.x * 50, 350 - intersectionPoint.y * 50);
     ctx.stroke();
 
-    // Draw points and lines connecting extreme points
-    ctx.beginPath();
-    const startPoint = uniqueBoundaryPoints[0];
-    ctx.moveTo(50 + startPoint.x * 50, 350 - startPoint.y * 50);
-    uniqueBoundaryPoints.forEach((point) => {
-        const x = 50 + point.x * 50;
-        const y = 350 - point.y * 50;
-        ctx.lineTo(x, y);
-        ctx.fillText(point.label, x + 5, y - 5);
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
-    });
-    ctx.closePath();
-    ctx.strokeStyle = 'green';
-    ctx.stroke();
-
-    // Draw bisector
+    // Draw perpendiculars to axes
     ctx.beginPath();
     ctx.strokeStyle = 'red';
-    ctx.moveTo(50, 350);
-    let intersectionX = 0;
-    let intersectionY = 0;
-    for (let i = 0; i < points.length - 1; i++) {
-        const p1 = points[i];
-        const p2 = points[i + 1];
-        if ((p1.x - p1.y) * (p2.x - p2.y) <= 0) {
-            // Calculate intersection
-            const t = (p1.y - p1.x) / ((p1.y - p1.x) - (p2.y - p2.x));
-            intersectionX = p1.x + t * (p2.x - p1.x);
-            intersectionY = p1.y + t * (p2.y - p1.y);
-            break;
-        }
-    }
-    const bx = 50 + intersectionX * 50;
-    const by = 350 - intersectionY * 50;
-    ctx.lineTo(bx, by);
-    ctx.stroke();
 
-    // Draw perpendicular lines
-    ctx.beginPath();
-    ctx.strokeStyle = 'black';
-    ctx.moveTo(bx, by);
-    ctx.lineTo(bx, 350); // Perpendicular to X-axis
-    ctx.moveTo(bx, by);
-    ctx.lineTo(50, by); // Perpendicular to Y-axis
+    // Perpendicular to X-axis
+    ctx.moveTo(50 + intersectionPoint.x * 50, 350 - intersectionPoint.y * 50);
+    ctx.lineTo(50 + intersectionPoint.x * 50, 350);
+
+    // Perpendicular to Y-axis
+    ctx.moveTo(50 + intersectionPoint.x * 50, 350 - intersectionPoint.y * 50);
+    ctx.lineTo(50, 350 - intersectionPoint.y * 50);
+
     ctx.stroke();
+  }
 }
-
 // Function to calculate minimax criterion
 function calculateMinimaxCriterion() {
-    const strategies = parseInt(document.getElementById("strategies").value);
-    const states = 2;
-    const lossMatrix = [];
+  const strategies = parseInt(document.getElementById("strategies").value);
+  const states = 2;
+  const lossMatrix = [];
 
-    for (let i = 0; i < strategies; i++) {
-        const row = [];
-        for (let j = 0; j < states; j++) {
-            const input = document.querySelector(`input[data-strategy='${i}'][data-state='${j}']`);
-            row.push(parseFloat(input.value));
-        }
-        lossMatrix.push(row);
-    }
-
-    // Step 1: Calculate maximum losses for each strategy
-    const maxLosses = lossMatrix.map(row => Math.max(...row));
-
-    // Step 2: Find strategies with minimum max losses
-    const minMaxLoss = Math.min(...maxLosses);
-    const optimalStrategies = maxLosses
-        .map((loss, index) => (loss === minMaxLoss ? index : -1))
-        .filter(index => index !== -1);
-
-    const results = document.getElementById("results");
-    results.innerHTML = `<h2>Results</h2>`;
-    results.innerHTML += `<p>Max losses per strategy: ${maxLosses.join(", ")}</p>`;
-    results.innerHTML += `<p>Minimum of max losses: ${minMaxLoss}</p>`;
-
-    if (optimalStrategies.length === 1) {
-        results.innerHTML += `<p>Optimal strategy: S${optimalStrategies[0] + 1}</p>`;
-        return;
-    }
-
-    // Step 3: Randomization for multiple optimal strategies
-    results.innerHTML += `<p>Optimal strategies: ${optimalStrategies.map(i => `S${i + 1}`).join(", ")}</p>`;
-
-    const [s1, s2] = optimalStrategies;
-
-    // Step 4: Build equations for expected losses
-    const equations = [];
+  for (let i = 0; i < strategies; i++) {
+    const row = [];
     for (let j = 0; j < states; j++) {
-        const equation = {
-            coefficient: lossMatrix[s1][j] - lossMatrix[s2][j],
-            constant: lossMatrix[s2][j]
-        };
-        equations.push(equation);
+      const input = document.querySelector(`input[data-strategy='${i}'][data-state='${j}']`);
+      row.push(parseFloat(input.value));
     }
+    lossMatrix.push(row);
+  }
 
-    // Step 5: Solve for p
-    const p = (equations[1].constant - equations[0].constant) /
-        (equations[0].coefficient - equations[1].coefficient);
-    const p1 = Math.max(0, Math.min(1, p));
-    const p2 = 1 - p1;
+  // Step 1: Calculate maximum losses for each strategy
+  const maxLosses = lossMatrix.map(row => Math.max(...row));
 
-    results.innerHTML += `<p>Randomization probabilities:</p>`;
-    results.innerHTML += `<p>Strategy S${s1 + 1}: ${p1.toFixed(2)}</p>`;
-    results.innerHTML += `<p>Strategy S${s2 + 1}: ${p2.toFixed(2)}</p>`;
+  // Step 2: Find strategies with minimum max losses
+  const minMaxLoss = Math.min(...maxLosses);
+  const optimalStrategies = maxLosses
+    .map((loss, index) => (loss === minMaxLoss ? index : -1))
+    .filter(index => index !== -1);
+
+  const results = document.getElementById("results");
+  results.innerHTML = `<h2>Results</h2>`;
+  results.innerHTML += `<p>Max losses per strategy: ${maxLosses.join(", ")}</p>`;
+  results.innerHTML += `<p>Minimum of max losses: ${minMaxLoss}</p>`;
+
+  if (optimalStrategies.length === 1) {
+    results.innerHTML += `<p>Optimal strategy: S${optimalStrategies[0] + 1}</p>`;
+    return;
+  }
+
+  // Step 3: Randomization for multiple optimal strategies
+  results.innerHTML += `<p>Optimal strategies: ${optimalStrategies.map(i => `S${i + 1}`).join(", ")}</p>`;
+
+  const [s1, s2] = optimalStrategies;
+
+  // Step 4: Build equations for expected losses
+  const equations = [];
+  for (let j = 0; j < states; j++) {
+    const equation = {
+      coefficient: lossMatrix[s1][j] - lossMatrix[s2][j],
+      constant: lossMatrix[s2][j]
+    };
+    equations.push(equation);
+  }
+
+  // Step 5: Solve for p
+  const p = (equations[1].constant - equations[0].constant) /
+    (equations[0].coefficient - equations[1].coefficient);
+  const p1 = Math.max(0, Math.min(1, p));
+  const p2 = 1 - p1;
+
+  results.innerHTML += `<p>Randomization probabilities:</p>`;
+  results.innerHTML += `<p>Strategy S${s1 + 1}: ${p1.toFixed(2)}</p>`;
+  results.innerHTML += `<p>Strategy S${s2 + 1}: ${p2.toFixed(2)}</p>`;
 }
 
