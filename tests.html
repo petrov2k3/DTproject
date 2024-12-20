@@ -20,10 +20,9 @@
     </div>
     <div class="content">
         <h1>Тести</h1>
-        <p>Пройдіть тестування, щоб перевірити свої знання з теорії прийняття рішень.</p>
+        <p>Пройдіть тестування, щоб перевірити свої знання з теми «Мінімаксний критерій знаходження рандомізованих розв’язків в задачах теорії прийняття рішень»</p>
 
         <div class="test-container">
-            <h2>Тести: Перевір свої знання</h2>
             
             <!-- Тест 1 -->
             <div class="question">
@@ -37,60 +36,91 @@
                 <input type="radio" id="q1a4" name="q1" value="a4">
                 <label for="q1a4">D. Для максимізації середнього виграшу</label>
             </div>
+
+            <!-- Тест 2 -->
+            <div class="question">
+                <p><strong>2. Яка роль мінімаксного критерію у фінансових ринках?</strong></p>
+                <input type="radio" id="q2a1" name="q2" value="a1">
+                <label for="q2a1">A. Максимізувати прибуток</label><br>
+                <input type="radio" id="q2a2" name="q2" value="a2">
+                <label for="q2a2">B. Зменшити втрати від різких коливань</label><br>
+                <input type="radio" id="q2a3" name="q2" value="a3">
+                <label for="q2a3">C. Збільшити ймовірність виграшу</label><br>
+                <input type="radio" id="q2a4" name="q2" value="a4">
+                <label for="q2a4">D. Зменшити середній збиток</label>
+            </div>
         
             <!-- Тест 9 -->
             <div class="question">
                 <p><strong>9. Продовжіть речення: Дане рівняння є _______</strong></p>
                 <input type="text" id="q9" name="q9" placeholder="Введіть відповідь">
+                <p id="q9-feedback"></p> <!-- Поле для підсвічування -->
             </div>
 
             <!-- Тест 10 -->
             <div class="question">
                 <p><strong>10. Геометричне місце точок, що відповідають рандомізованим розв’язкам, називають _______</strong></p>
                 <input type="text" id="q10" name="q10" placeholder="Введіть відповідь">
+                <p id="q10-feedback"></p> <!-- Поле для підсвічування -->
             </div>
         
             <!-- Тест 12 -->
             <div class="question">
-                <p><strong>12. Встановіть правильну послідовність алгоритму пошуку рандомізованого розв’язку за мінімаксним критерієм:</strong></p>
+                <p><strong>12. Встановіть правильну послідовність:</strong></p>
                 <ol>
-                    <li><select name="step1" id="step1">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                    </select></li>
-                    <li><select name="step2" id="step2">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                    </select></li>
-                    <li><select name="step3" id="step3">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                    </select></li>
-                    <li><select name="step4" id="step4">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                    </select></li>
-                    <li><select name="step5" id="step5">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                    </select></li>
+                    <li>
+                        <select id="step1" name="step1">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <span id="step1-feedback"></span>
+                    </li>
+                    <li>
+                        <select id="step2" name="step2">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <span id="step2-feedback"></span>
+                    </li>
+                    <li>
+                        <select id="step3" name="step3">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <span id="step3-feedback"></span>
+                    </li>
+                    <li>
+                        <select id="step4" name="step4">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <span id="step4-feedback"></span>
+                    </li>
+                    <li>
+                        <select id="step5" name="step5">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <span id="step5-feedback"></span>
+                    </li>
                 </ol>
             </div>
+            
         
             <button type="button" class="submit-btn" onclick="checkAnswers()">Відправити</button>
             <p id="result" style="font-weight: bold; margin-top: 20px;"></p>
