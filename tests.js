@@ -3,6 +3,7 @@ function checkAnswers() {
     const correctAnswers = {
         q1: 'a2', // Правильна відповідь для тесту 1
         q2: 'a2', // Правильна відповідь для тесту 2
+        q3: 'a4', // Правильна відповідь для тесту 2
         q9: ['рівнянням прямокутного клина', 'прямокутним клином'], // Множинні правильні відповіді
         q10: ['платіжною множиною D' , 'Платіжною множиною D', 'платіжною множиною'],
         step: ['C', 'A', 'D', 'B', 'E'] // Правильні відповіді для питання на відповідність
@@ -11,7 +12,7 @@ function checkAnswers() {
     let score = { value: 0 }; // Лічильник балів
 
     // Перевірка тестів з одиночним вибором
-    const singleChoiceQuestions = ['q1', 'q2'];
+    const singleChoiceQuestions = ['q1', 'q2', 'q3'];
     singleChoiceQuestions.forEach(question => {
         const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
         const correctAnswerId = `${question}${correctAnswers[question]}`; // ID правильного варіанту
@@ -69,7 +70,7 @@ function checkAnswers() {
 
     // Виведення результату
     const result = document.getElementById('result');
-    result.textContent = `Ваш результат: ${score.value}/9 правильних відповідей`;
+    result.textContent = `Ваш результат: ${score.value}/10 правильних відповідей`;
     //result.style.color = score.value === 4 ? 'green' : 'red';
     //result.style.color = 'black';
 }
