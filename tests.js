@@ -1,21 +1,30 @@
 function checkAnswers() {
-    // Правильні відповіді
+    
     const correctAnswers = {
         q1: 'a2', // Правильна відповідь для тесту 1
-        q2: 'a2', // Правильна відповідь для тесту 2
-        q3: 'a4', // Правильна відповідь для тесту 2
-        q9: ['рівнянням прямокутного клина', 'прямокутним клином'], // Множинні правильні відповіді
+        q2: 'a2',
+        q3: 'a4',
+        q4: 'a1',
+        q5: 'a4',
+        q6: 'a3',
+        q7: 'a3',
+        q8: 'a2',
+        q9: ['рівнянням прямокутного клина', 'прямокутним клином'], // Надаємо користувачу гнучкість відповіді
         q10: ['платіжною множиною D' , 'Платіжною множиною D', 'платіжною множиною'],
-        step: ['C', 'A', 'D', 'B', 'E'] // Правильні відповіді для питання на відповідність
+        q11: 'a1',
+        step: ['C', 'A', 'D', 'B', 'E'], // Правильні відповіді для питання на відповідність
+        q13: 'a2',
+        q14: 'a3',
+        q15: 'a4'
     };
 
     let score = { value: 0 }; // Лічильник балів
 
     // Перевірка тестів з одиночним вибором
-    const singleChoiceQuestions = ['q1', 'q2', 'q3'];
+    const singleChoiceQuestions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q11', 'q13', 'q14', 'q15'];
     singleChoiceQuestions.forEach(question => {
         const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
-        const correctAnswerId = `${question}${correctAnswers[question]}`; // ID правильного варіанту
+        const correctAnswerId = `${question}${correctAnswers[question]}`;
 
         // Якщо відповідь вибрана
         if (selectedAnswer) {
@@ -70,7 +79,7 @@ function checkAnswers() {
 
     // Виведення результату
     const result = document.getElementById('result');
-    result.textContent = `Ваш результат: ${score.value}/10 правильних відповідей`;
+    result.textContent = `Ваш результат: ${score.value}/19 правильних відповідей`;
     //result.style.color = score.value === 4 ? 'green' : 'red';
     //result.style.color = 'black';
 }

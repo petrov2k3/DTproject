@@ -230,3 +230,21 @@ video {
     color: red;
     font-weight: bold;
 }
+
+.tests-small-image {
+    display: block;
+    margin: 20px auto; /* Центрування картинки */
+    max-width: 15%; /* Масштабування для адаптивності */
+    height: auto; /* Збереження пропорцій */
+    border: 2px solid #ddd; /* Декоративна рамка */
+    border-radius: 5px; /* Закруглені кути */
+}
+
+.tests-medium-image {
+    display: block;
+    margin: 20px auto; /* Центрування картинки */
+    max-width: 70%; /* Масштабування для адаптивності */
+    height: auto; /* Збереження пропорцій */
+    border: 2px solid #ddd; /* Декоративна рамка */
+    border-radius: 5px; /* Закруглені кути */
+}
