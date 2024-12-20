@@ -184,6 +184,13 @@ li {
     border-radius: 5px; /* Закруглені кути */
 }
 
+video {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
 /* Стилі для тестів */
 
 .test-container {
