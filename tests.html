@@ -23,31 +23,72 @@
         <p>Пройдіть тестування, щоб перевірити свої знання з теорії прийняття рішень.</p>
 
         <div class="test-container">
-            <h2>Тест 1: Основи теорії прийняття рішень</h2>
-            <form>
-                <div class="question">
-                    <p><strong>1. Що таке мінімаксний критерій?</strong></p>
-                    <input type="radio" id="q1a1" name="q1" value="a1">
-                    <label for="q1a1">Метод максимізації вигоди</label><br>
-                    <input type="radio" id="q1a2" name="q1" value="a2">
-                    <label for="q1a2">Метод мінімізації ризиків у найгірших сценаріях</label><br>
-                    <input type="radio" id="q1a3" name="q1" value="a3">
-                    <label for="q1a3">Система ухвалення колективних рішень</label>
-                </div>
-
-                <div class="question">
-                    <p><strong>2. Що таке рівновага Неша?</strong></p>
-                    <input type="radio" id="q2a1" name="q2" value="a1">
-                    <label for="q2a1">Стан, коли жоден учасник не може покращити свій результат, змінюючи стратегію односторонньо</label><br>
-                    <input type="radio" id="q2a2" name="q2" value="a2">
-                    <label for="q2a2">Метод оптимізації вигод у кооперативних задачах</label><br>
-                    <input type="radio" id="q2a3" name="q2" value="a3">
-                    <label for="q2a3">Розподіл ресурсів між учасниками</label>
-                </div>
-
-                <button type="submit" class="submit-btn">Відправити</button>
-            </form>
+            <h2>Тести: Перевір свої знання</h2>
+            
+            <!-- Тест 1 -->
+            <div class="question">
+                <p><strong>1. Для чого використовується мінімаксний критерій у теорії прийняття рішень?</strong></p>
+                <input type="radio" id="q1a1" name="q1" value="a1">
+                <label for="q1a1">A. Для максимізації виграшу</label><br>
+                <input type="radio" id="q1a2" name="q1" value="a2">
+                <label for="q1a2">B. Для мінімізації максимального збитку</label><br>
+                <input type="radio" id="q1a3" name="q1" value="a3">
+                <label for="q1a3">C. Для мінімізації середнього збитку</label><br>
+                <input type="radio" id="q1a4" name="q1" value="a4">
+                <label for="q1a4">D. Для максимізації середнього виграшу</label>
+            </div>
+        
+            <!-- Тест 9 (відкрите питання) -->
+            <div class="question">
+                <p><strong>9. Продовжіть речення: Дане рівняння є _______</strong></p>
+                <input type="text" id="q9" name="q9" placeholder="Введіть відповідь">
+            </div>
+        
+            <!-- Тест 12 (відповідність) -->
+            <div class="question">
+                <p><strong>12. Встановіть правильну послідовність алгоритму пошуку рандомізованого розв’язку за мінімаксним критерієм:</strong></p>
+                <ol>
+                    <li><select name="step1" id="step1">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select></li>
+                    <li><select name="step2" id="step2">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select></li>
+                    <li><select name="step3" id="step3">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select></li>
+                    <li><select name="step4" id="step4">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select></li>
+                    <li><select name="step5" id="step5">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select></li>
+                </ol>
+            </div>
+        
+            <button type="submit" class="submit-btn">Відправити</button>
         </div>
+        
     </div>
 </body>
 </html>
