@@ -17,7 +17,7 @@ document.body.innerHTML = `
     }
 
     #calculator-container {
-    margin-left: 400px;
+      margin-left: 400px;
       margin-top: 50px;
       flex: 1;
       max-width: 400px;
@@ -91,7 +91,7 @@ document.body.innerHTML = `
     }
 
     #graph-container {
-    margin-top: 50px;
+      margin-top: 50px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -101,7 +101,6 @@ document.body.innerHTML = `
     canvas {
       width: 100%;
       max-width: 600px;
-      
     }
   </style>
 
@@ -112,7 +111,8 @@ document.body.innerHTML = `
       <label for='strategies'>Number of Strategies:</label>
       <input id='strategies' type='number' min='1' value='2'>
 
-
+      <label for='states'>Number of States:</label>
+      <input id='states' type='number' min='2' value='2'>
 
       <button id='generateMatrix'>Generate Matrix</button>
 
@@ -128,10 +128,20 @@ document.body.innerHTML = `
   </div>
 `;
 
-
 // Event listeners
 const generateMatrixButton = document.getElementById('generateMatrix');
-generateMatrixButton.addEventListener('click', generateMatrix);
+generateMatrixButton.addEventListener('click', () => {
+  const statesInput = document.getElementById('states');
+  const states = parseInt(statesInput.value);
+
+  if (states !== 2) {
+    alert('На даний момент ми можемо розв’язати задачу лише для 2 станів. Будь ласка, введіть значення 2.');
+    statesInput.value = '2'; // Автоматично встановлює правильне значення
+    return;
+  }
+
+  generateMatrix();
+});
 
 const calculateButton = document.getElementById('calculate');
 calculateButton.addEventListener('click', () => {
@@ -142,7 +152,7 @@ calculateButton.addEventListener('click', () => {
 // Function to generate the input matrix
 function generateMatrix() {
   const strategies = parseInt(document.getElementById('strategies').value);
-  const states = 2;
+  const states = 2; // Кількість станів завжди 2
   const matrixContainer = document.getElementById('matrixContainer');
   matrixContainer.innerHTML = '';
 
@@ -261,6 +271,18 @@ function calculate() {
   ctx.moveTo(50, 350);
   ctx.lineTo(50, 50); // Y-axis
   ctx.stroke();
+
+  // Add labels to axes
+  ctx.font = '14px Arial';
+  ctx.fillStyle = 'black';
+  ctx.fillText('L1', 540, 365); // Label for X-axis
+  ctx.fillText('L2', 30, 55); // Label for Y-axis
+
+  // Add coordinates to axes
+  for (let i = 1; i < 10; i++) {
+    ctx.fillText(i, 50 + i * 50, 365); // X-axis coordinates
+    ctx.fillText(i, 30, 350 - i * 50); // Y-axis coordinates
+  }
 
   // Draw convex hull
   ctx.beginPath();
@@ -394,4 +416,3 @@ function calculateMinimaxCriterion() {
   results.innerHTML += `<p>Strategy S${s1 + 1}: ${p1.toFixed(2)}</p>`;
   results.innerHTML += `<p>Strategy S${s2 + 1}: ${p2.toFixed(2)}</p>`;
 }
-
